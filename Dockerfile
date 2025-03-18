@@ -48,5 +48,9 @@ COPY assistant.service /etc/avahi/services/assistant.service
 
 EXPOSE 9001 8501
 
-# Start supervisord
-CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+# Copy entrypoint script into the container
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Use the entrypoint script as the container's startup command
+CMD ["/app/entrypoint.sh"]
